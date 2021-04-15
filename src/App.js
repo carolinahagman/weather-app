@@ -1,17 +1,15 @@
+import "./App.css";
 
-import './App.css';
-
-import Title from "./components/title";
-import Form from "./components/input-form";
+import Title from "./components/Title";
+import InputForm from "./components/Input-form";
+import WeatherCard from "./components/WeatherCard";
 
 function App() {
   return (
-    <div className="text-center mt-4">
-      <Form></Form>
-      <div className=""></div>
-   <Title>check the weather</Title>
-   
-    
+    <div className="w-screen h-screen bg-peach flex flex-col items-center justify-center">
+      <InputForm />
+      <WeatherCard />
+      <Title>check the weather</Title>
     </div>
   );
 }
