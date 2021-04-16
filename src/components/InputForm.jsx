@@ -9,17 +9,14 @@ const InputForm = () => {
     >
       <div className="flex flex-col m-4 ">
         <input
-          className="bg-transparent border-b border-white w-64 focus:outline-none"
+          className="bg-transparent border-b border-white w-64 focus:outline-none focus:bg-transparent"
           type="text"
           name="location"
           id="location"
         />
         <label htmlFor="location">change location</label>
       </div>
-      <button
-        className="bg-transparent border border-white rounded-lg h-8 mt-2 px-2 "
-        type="submit"
-      >
+      <button className="bg-transparent border border-white rounded-lg h-8 mt-2 px-2 ">
         get weather
       </button>
     </form>
