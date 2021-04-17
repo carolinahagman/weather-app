@@ -1,18 +1,26 @@
 import React from "react";
 
-const InputForm = () => {
+const ToggleButton = () => {
   return (
     <form
-      className="flex text-white w-screen justify-center "
+      className="flex text-white w-screen justify-center pt-8 "
       action=""
       method="post"
     >
-      <div>
-        <input type="color" name="bg-color" id="bg-color" value="#FEC2A0" />
-        <label htmlFor="bg-color">change background color</label>
+      <div className="flex flex-col items-center">
+        <input
+          className="bg-transparent "
+          type="color"
+          name="bg-color"
+          id="bg-color"
+          value="#FEC2A0"
+        />
+        <label className="font-thin " htmlFor="bg-color text-xs">
+          change background color
+        </label>
       </div>
     </form>
   );
 };
 
-export default InputForm;
+export default ToggleButton;

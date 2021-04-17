@@ -3,23 +3,22 @@ import "./App.css";
 import Title from "./components/Title";
 import InputForm from "./components/InputForm";
 import WeatherCard from "./components/WeatherCard";
+import ToggleButton from "./components/ToggleButton";
 import React from "react";
 
 const weatherKey = process.env.REACT_APP_WEATHER_API_KEY;
 const giphyKey = process.env.REACT_APP_WEATHER_API_KEY;
-let cityInput = "Göteborg";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      city: cityInput,
+      city: undefined,
       celsiusDeg: undefined,
       icon: undefined,
       description: "",
       error: false,
     };
-    this.getWeather();
   }
 
   calcCelsius(degKelvin) {
@@ -27,37 +26,52 @@ class App extends React.Component {
     return celsius;
   }
 
-  getWeather = async () => {
-    const apiRequest = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${weatherKey}`
-    );
+  getWeather = async (event) => {
+    event.preventDefault();
 
-    const apiResponse = await apiRequest.json();
-    const iconName = apiResponse.weather[0].icon;
-    const iconApi = await fetch(
-      "http://openweathermap.org/img/w/" + iconName + ".png"
-    );
+    const locationInput = event.target.elements.location.value;
 
-    this.setState({
-      city: apiResponse.name,
-      celsiusDeg: this.calcCelsius(apiResponse.main.temp),
-      icon: iconApi.url,
-      description: apiResponse.weather[0].description,
-    });
+    if (locationInput) {
+      const apiRequest = await fetch(
+        `http://api.openweathermap.org/data/2.5/weather?q=${locationInput}&appid=${weatherKey}`
+      );
+
+      const apiResponse = await apiRequest.json();
+      const iconName = apiResponse.weather[0].icon;
+      const iconApi = await fetch(
+        "http://openweathermap.org/img/w/" + iconName + ".png"
+      );
+
+      this.setState({
+        city: apiResponse.name,
+        celsiusDeg: this.calcCelsius(apiResponse.main.temp),
+        icon: iconApi.url,
+        description: apiResponse.weather[0].description,
+        error: false,
+      });
+    } else {
+      this.setState({
+        error: true,
+      });
+    }
   };
 
   render() {
     return (
-      <div className="w-screen h-screen bg-peach flex flex-col items-center justify-center">
-        <InputForm />
-        <WeatherCard
-          city={this.state.city}
-          celsiusDeg={this.state.celsiusDeg}
-          //change to giphy sticker
-          icon={this.state.icon}
-          description={this.state.description}
-        />
-        <Title>check the weather</Title>
+      <div className="w-screen h-screen bg-peach">
+        <div className="flex flex-col items-center pt-6">
+          <Title>check the weather</Title>
+          <InputForm loadWeather={this.getWeather} error={this.state.error} />
+
+          <WeatherCard
+            city={this.state.city}
+            celsiusDeg={this.state.celsiusDeg}
+            //change to giphy sticker
+            icon={this.state.icon}
+            description={this.state.description}
+          />
+        </div>
+        <ToggleButton />
       </div>
     );
   }
