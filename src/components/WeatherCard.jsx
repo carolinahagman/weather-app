@@ -7,7 +7,7 @@ const WeatherCard = (props) => {
         {props.city}, {props.country}
       </h2>
       <div className="weather-icon">
-        <img className="w-12" src={props.icon} alt={props.description} />
+        <img className="w-12" src={props.icon} alt={props.alt} />
       </div>
       {props.temp ? <h3 className="text-5xl">{props.temp}&deg;c</h3> : null}
       <p>{props.description}</p>
