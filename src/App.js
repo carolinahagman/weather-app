@@ -14,6 +14,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
   const [icon, setIcon] = useState("");
+  const [error, setError] = useState(false);
 
   const search = (event) => {
     if (event.key === "Enter") {
@@ -22,6 +23,10 @@ function App() {
       )
         .then((res) => res.json())
         .then((result) => {
+          if (result.message === "city not found") {
+            setError(true);
+            return;
+          }
           setWeather(result);
           setQuery("");
         });
