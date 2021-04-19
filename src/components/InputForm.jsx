@@ -20,7 +20,7 @@ const InputForm = (props) => {
             change location
           </label>
         </div>
-        <button className="bg-transparent border font-thin border-white rounded-lg h-8 mt-2 px-2 ">
+        <button className="bg-transparent border font-thin border-white rounded-lg h-8 mt-2 px-2 focus:outline-none hover:shadow-lg ease-in-out duration-500">
           get weather
         </button>
       </form>

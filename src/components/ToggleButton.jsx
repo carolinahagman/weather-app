@@ -7,7 +7,7 @@ const ToggleButton = () => {
       action=""
       method="post"
     >
-      <div className="flex flex-col items-center">
+      <div className="w-full px-2  flex flex-col justify-end">
         <input
           className="bg-transparent "
           type="color"

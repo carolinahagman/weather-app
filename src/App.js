@@ -1,6 +1,6 @@
 import "./App.css";
 
-import Title from "./components/Title";
+import TodaysDate from "./components/TodaysDate";
 import InputForm from "./components/InputForm";
 import WeatherCard from "./components/WeatherCard";
 import ToggleButton from "./components/ToggleButton";
@@ -60,9 +60,8 @@ class App extends React.Component {
     return (
       <div className="w-screen h-screen bg-peach">
         <div className="flex flex-col items-center pt-6">
-          <Title>check the weather</Title>
+          <TodaysDate />
           <InputForm loadWeather={this.getWeather} error={this.state.error} />
-
           <WeatherCard
             city={this.state.city}
             celsiusDeg={this.state.celsiusDeg}
