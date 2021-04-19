@@ -17,7 +17,7 @@ function App() {
   const search = (event) => {
     if (event.key === "Enter") {
       fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${weatherKey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${weatherKey}`
       )
         .then((res) => res.json())
         .then((result) => {
