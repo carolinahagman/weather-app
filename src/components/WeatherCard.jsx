@@ -6,10 +6,14 @@ const WeatherCard = (props) => {
       <h2 className="text-3xl">
         {props.city}, {props.country}
       </h2>
-      <div className="weather-icon">
-        <img className="w-12" src={props.icon} alt={props.alt} />
-      </div>
       {props.temp ? <h3 className="text-5xl">{props.temp}&deg;c</h3> : null}
+      <div className="weather-icon">
+        <img
+          className="w-full max-h-40 rounded-md"
+          src={props.icon}
+          alt={props.alt}
+        />
+      </div>
       <p>{props.description}</p>
     </div>
   );

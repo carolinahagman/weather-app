@@ -13,6 +13,7 @@ const giphyKey = process.env.REACT_APP_GIPHY_API_KEY;
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
+  const [icon, setIcon] = useState("");
 
   const search = (event) => {
     if (event.key === "Enter") {
@@ -23,15 +24,20 @@ function App() {
         .then((result) => {
           setWeather(result);
           setQuery("");
-
-          const getGif = result.weather[0].main;
-          const request = fetch(
-            `https://api.giphy.com/v1/gifs/search?api_key=${giphyKey}&q=${getGif}&limit=1`
-          );
-          console.log(request);
         });
     }
   };
+  if (Object.keys(weather).length !== 0) {
+    const getGif = weather.weather[0].description;
+    fetch(
+      `https://api.giphy.com/v1/stickers/search?api_key=${giphyKey}&q=${getGif}&limit=1`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        setIcon(result.data[0].images.downsized.url);
+      });
+  }
+
   return (
     <div className="w-screen h-screen bg-pink">
       <div className="w-full  flex flex-col py-8 items-center">
@@ -45,7 +51,7 @@ function App() {
           <WeatherCard
             city={weather.name}
             country={weather.sys.country}
-            icon="2"
+            icon={icon}
             alt={weather.weather[0].main}
             description={weather.weather[0].description}
             temp={Math.round(weather.main.temp)}
