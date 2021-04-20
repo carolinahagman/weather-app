@@ -1,9 +1,9 @@
 import React from "react";
 
-const Error = () => {
+const Error = (props) => {
   return (
     <div className="flex text-white w-screen justify-center">
-      <span>Enter a valid city</span>
+      <span>{props.error}</span>
     </div>
   );
 };

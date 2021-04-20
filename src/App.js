@@ -47,7 +47,7 @@ function App() {
     <div className="w-screen h-screen bg-pink">
       <div className="w-full flex flex-col py-8 items-center">
         <TodaysDate />
-        {error ? <Error /> : null}
+        {error ? <Error error="Enter a valid city" /> : null}
         <SearchField
           handleChange={(e) => setQuery(e.target.value)}
           value={query}
