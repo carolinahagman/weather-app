@@ -2,9 +2,7 @@ import React from "react";
 
 const SearchField = (props) => {
   return (
-    <div className="flex text-white w-screen justify-center  ">
-      <div className="">{props.error ? error() : null}</div>
-
+    <div className="flex text-white w-screen justify-center">
       <div className="flex flex-col m-4 ">
         <input
           className=" bg-transparent border-b border-white w-64 focus:outline-none focus:bg-transparent placeholder-white placeholder-opacity-50"
@@ -24,9 +22,5 @@ const SearchField = (props) => {
     </div>
   );
 };
-
-function error() {
-  return <p className="text-center text-red-800">Please enter a valid city</p>;
-}
 
 export default SearchField;

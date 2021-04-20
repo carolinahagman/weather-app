@@ -3,18 +3,17 @@ import "./App.css";
 import TodaysDate from "./components/TodaysDate";
 import SearchField from "./components/SearchField";
 import WeatherCard from "./components/WeatherCard";
+import Error from "./components/Error";
 import React, { useState } from "react";
 
 const weatherKey = process.env.REACT_APP_WEATHER_API_KEY;
 const giphyKey = process.env.REACT_APP_GIPHY_API_KEY;
 
-//
-
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
   const [icon, setIcon] = useState("");
-  // const [error, setError] = useState(false);
+  const [error, setError] = useState(false);
 
   const search = (event) => {
     if (event.key === "Enter") {
@@ -24,11 +23,12 @@ function App() {
         .then((res) => res.json())
         .then((result) => {
           if (result.message === "city not found") {
-            // setError(true);
+            setError(true);
             return;
           }
           setWeather(result);
           setQuery("");
+          setError(false);
         });
     }
   };
@@ -45,14 +45,15 @@ function App() {
 
   return (
     <div className="w-screen h-screen bg-pink">
-      <div className="w-full  flex flex-col py-8 items-center">
+      <div className="w-full flex flex-col py-8 items-center">
         <TodaysDate />
+        {error ? <Error /> : null}
         <SearchField
           handleChange={(e) => setQuery(e.target.value)}
           value={query}
           handleKeyPress={search}
         />
-        {typeof weather.main != "undefined" ? (
+        {typeof weather.main !== "undefined" ? (
           <WeatherCard
             city={weather.name}
             country={weather.sys.country}

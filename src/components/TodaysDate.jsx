@@ -7,8 +7,8 @@ const TodaysDate = () => (
 );
 
 //get the date how I want it
-const buildDate = (d) => {
-  let months = [
+const buildDate = (e) => {
+  const months = [
     "January",
     "February",
     "March",
@@ -22,7 +22,7 @@ const buildDate = (d) => {
     "November",
     "December",
   ];
-  let days = [
+  const days = [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -32,10 +32,10 @@ const buildDate = (d) => {
     "Saturday",
   ];
 
-  let day = days[d.getDay()];
-  let date = d.getDate();
-  let month = months[d.getMonth()];
-  let year = d.getFullYear();
+  let day = days[e.getDay()];
+  let date = e.getDate();
+  let month = months[e.getMonth()];
+  let year = e.getFullYear();
 
   return `${day} ${date} ${month} ${year}`;
 };
